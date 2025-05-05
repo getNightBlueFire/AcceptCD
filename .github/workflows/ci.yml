@@ -49,11 +49,11 @@ jobs:
       - name: Echo Hello World
         run: echo "Hello from GitHub Actions 👋"
 
-      - name: Run Checkstyle (code quality)
-        run: mvn checkstyle:check || true # Не прерывает билд, просто показывает
-
-      - name: Run Checkstyle (generate report)
+      - name: Run Checkstyle
         run: mvn checkstyle:checkstyle
+
+      - name: List checkstyle output (debug)
+        run: ls -la target/site
 
       - name: Upload Checkstyle report
         uses: actions/upload-artifact@v4

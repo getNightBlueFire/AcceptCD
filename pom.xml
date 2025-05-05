@@ -7,6 +7,8 @@
     <groupId>org.example</groupId>
     <artifactId>AcceptCD</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>Demo App</name>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -28,23 +30,46 @@
     </properties>
     <build>
         <plugins>
+            <!-- Checkstyle plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.2</version>
-                <configuration>
-                    <configLocation>google_checks.xml</configLocation>
-                </configuration>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
-                        <phase>verify</phase>
+                        <id>validate</id>
+                        <phase>validate</phase>
                         <goals>
-                            <goal>check</goal>
+                            <goal>checkstyle</goal>
+                            <goal>checkstyle-aggregate</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <configLocation>google_checks.xml</configLocation>
+                    <encoding>UTF-8</encoding>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>false</failsOnError>
+                </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.3.0</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>checkstyle</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
